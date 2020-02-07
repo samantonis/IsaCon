@@ -1,0 +1,8 @@
+{
+    "CreateAPIKey": 1,
+    "AppSyncApiName": "isacon",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "S3DeploymentBucket": "amplify-authcra-devw-174034-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/58a0fe1fc2a385f63ef6c0d294607f3991a0cfe8"
+}
