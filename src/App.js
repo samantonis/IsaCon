@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import { withAuthenticator } from 'aws-amplify-react'
 import Amplify from 'aws-amplify';
+import { ThemeProvider } from 'styled-components';
+import { Header, Routing } from './components';
 import aws_exports from './aws-exports';
+import { theme } from './config/theme';
+import { Container } from './atoms/styled';
 Amplify.configure(aws_exports);
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-         under construction
-        </header>
+        <ThemeProvider theme={theme}>
+          <Header />
+          <Container>
+            <Routing />
+          </Container>
+        </ThemeProvider>
       </div>
     );
   }
 }
 
-export default withAuthenticator(App, true);
+export default App;
