@@ -2,6 +2,7 @@ import { Link } from '@reach/router';
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../Isacon_logo.png';
+import Burger from '../atoms/Burger'
 
 const StyledHeader = styled.header`
   display: flex;
@@ -36,6 +37,7 @@ export const Header = () => (
     <Link to="/">
       <Logo src={logo} alt="IsaCon" />
     </Link>
+	  <Burger/>
     <Nav>
       <NavLink to="/">Home</NavLink>
       <NavLink to="admin">Admin</NavLink>
