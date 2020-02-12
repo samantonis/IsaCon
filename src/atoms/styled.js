@@ -11,3 +11,9 @@ export const Image = styled.img`
   width: 100%;
   height: auto;
 `;
+
+export const Button = styled.button`
+  padding: 10px;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.secondary};
+`;

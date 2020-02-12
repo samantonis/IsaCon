@@ -5,8 +5,8 @@ const AmplifyCustomTheme = {
   ...AmplifyTheme,
   sectionHeader: {
     ...AmplifyTheme.sectionHeader,
-    color: '#fff',
-    backgroundColor: 'darkGreen'
+    color: '#F2EBCB',
+    backgroundColor: '#182B19'
   },
   sectionFooter: {
     ...AmplifyTheme.sectionFooter,
@@ -20,8 +20,8 @@ const AmplifyCustomTheme = {
   },
   button: {
     ...AmplifyTheme.button,
-    backgroundColor: 'darkGreen',
-    color: '#fff'
+    backgroundColor: '#182B19',
+    color: '#F2EBCB'
   }
 };
 
@@ -29,8 +29,8 @@ const AmplifyCustomTheme = {
 export const theme = {
   ...AmplifyCustomTheme,
   colors: {
-    primary: 'darkGreen',
-    secondary: 'blue',
+    primary: '#182B19',
+    secondary: '#F2EBCB',
     black: '#000',
     white: '#fff'
   },

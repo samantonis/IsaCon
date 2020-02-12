@@ -6,7 +6,8 @@
 
 - React (CRA, Hooks)
 - AWS (Cognito , Amplify)
+- GraphQL
 - Styled-Components
 - Reach Router
 - Prettier
-- Redux
+- Redux (added as an example , we don't really need it in combination with GraphQL)
