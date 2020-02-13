@@ -1,11 +1,12 @@
 import { withAuthenticator } from 'aws-amplify-react';
 import React from 'react';
+import { PageHeader } from '../atoms/styled'
 import { theme } from '../config/theme';
 
 const AdminPage = () => (
-  <div>
-    <header>admin page, you should be logged in</header>
-  </div>
+  <>
+    <PageHeader>admin page, you should be logged in</PageHeader>
+  </>
 );
 
 export default withAuthenticator(AdminPage, { theme });

@@ -1,12 +1,12 @@
 import { Router } from '@reach/router';
 import React from 'react';
-import { HomePage, AdminPage, SkillsPage, ProjectsPage } from '../pages';
+import { HomePage, AdminPage, ProjectsPage, ExamplesPage } from '../pages';
 
 export const Routing = () => (
   <Router>
     <HomePage path="/" />
     <AdminPage path="admin" />
-    <SkillsPage path="skills" />
     <ProjectsPage path="projects" />
+    <ExamplesPage path="examples" />
   </Router>
 );

@@ -1,9 +1,10 @@
 import React from 'react';
+import { PageHeader } from '../atoms/styled'
 
 const ProjectsPage = () => (
-  <div>
-    <header>project page</header>
-  </div>
+  <>
+    <PageHeader>project page</PageHeader>
+  </>
 );
 
 export default ProjectsPage;
