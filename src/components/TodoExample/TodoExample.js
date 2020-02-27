@@ -1,45 +1,33 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { graphqlOperation, API } from 'aws-amplify';
-import { Connect } from 'aws-amplify-react';
 import { TodoForm, TodoList } from '../../components';
 import * as queries from '../../graphql/queries';
-import * as subscriptions from '../../graphql/subscriptions';
-import * as mutations from '../../graphql/mutations';
 import { todosFetch } from '../../store/reducers/todo';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 
-const TodoExample = () => {
+const TodoExample = ({ todos }) => {
   const dispatch = useDispatch();
 
-  // fetch data REST style and store in redux purely as example
-  useEffect(() => {
-    async function fetchData() {
-      const allTodos = await API.graphql(graphqlOperation(queries.listTodos));
-      dispatch(todosFetch(allTodos));
+  const { loading, error } = useQuery(
+    gql`
+      ${queries.listTodos}
+    `,
+    {
+      onCompleted(data) {
+        dispatch(todosFetch(data));
+      }
     }
-    fetchData();
-  }, []);
+  );
+
+  if (error) return <h3>Error</h3>;
+  if (loading || !todos) return <h3>Loading...</h3>;
 
   return (
     <>
       <h3>The famous todo example</h3>
-
-      <Connect mutation={graphqlOperation(mutations.createTodo)}>
-        {({ mutation }) => <TodoForm onCreate={mutation} />}
-      </Connect>
-
-      <Connect
-        query={graphqlOperation(queries.listTodos)}
-        subscription={graphqlOperation(subscriptions.onCreateTodo)}
-        onSubscriptionMsg={(prev, { onCreateTodo }) => {
-          prev.listTodos.items.push(onCreateTodo);
-          return prev;
-        }}
-      >
-        {({ data: { listTodos }, loading, error }) => (
-          <TodoList listTodos={listTodos} loading={loading} error={error} />
-        )}
-      </Connect>
+      <TodoForm />
+      <TodoList listTodos={todos} loading={loading} error={error} />
     </>
   );
 };

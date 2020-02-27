@@ -1,18 +1,37 @@
+import { useMutation } from '@apollo/react-hooks';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
 import { Button, Input } from '../../atoms/styled';
 import { Add } from 'styled-icons/material/Add';
+import * as mutations from '../../graphql/mutations';
+import { gql } from 'apollo-boost';
+import { todosAdd } from '../../store/reducers/todo';
 
-
-const TodoForm = ({ onCreate }) => {
+const TodoForm = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const dispatch = useDispatch();
 
-  const addTodo = () => {
-    const input = {
-      name: name,
-      description: description
-    };
-    onCreate({ input });
+  const [addTodo] = useMutation(
+    gql`
+      ${mutations.createTodo}
+    `,
+    {
+      onCompleted(data) {
+        dispatch(todosAdd(data));
+      }
+    }
+  );
+
+  const onAdd = () => {
+    addTodo({
+      variables: {
+        input: {
+          name: name,
+          description: description
+        }
+      }
+    });
   };
 
   return (
@@ -33,7 +52,9 @@ const TodoForm = ({ onCreate }) => {
           setDescription(event.target.value);
         }}
       />
-      <Button onClick={addTodo}><Add size="32"/></Button>
+      <Button onClick={onAdd}>
+        <Add size="32" />
+      </Button>
     </>
   );
 };

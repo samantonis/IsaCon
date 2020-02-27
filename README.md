@@ -11,10 +11,8 @@
 - Styled-Components + Styled-Icons
 - Reach Router
 - Prettier
-- Redux (added as an example , we don't really need it in combination with GraphQL)
+- Redux (added as an example , we don't really need it and could opt for Apollo client cache)
 
 TODO : 
-
-- Apollo Client
 - PWA
 - More examples

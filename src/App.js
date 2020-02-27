@@ -8,8 +8,23 @@ import { theme } from './config/theme';
 import { Container } from './atoms/styled';
 import store from './store/createStore';
 import { Normalize } from 'styled-normalize';
+import ApolloClient, { InMemoryCache } from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 Amplify.configure(aws_exports);
+
+const apolloClient = new ApolloClient({
+  uri: aws_exports.aws_appsync_graphqlEndpoint,
+  region: aws_exports.aws_appsync_region,
+  request: operation => {
+    operation.setContext({
+      headers: {
+        "X-Api-Key": aws_exports.aws_appsync_apiKey
+      }
+    });
+  },
+  cache: new InMemoryCache()
+});
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -32,16 +47,18 @@ class App extends Component {
   render() {
     return (
       <>
-        <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            <Normalize />
-            <GlobalStyle />
-            <Header />
-            <Container>
-              <Routing />
-            </Container>
-          </ThemeProvider>
-        </Provider>
+        <ApolloProvider client={apolloClient}>
+          <Provider store={store}>
+            <ThemeProvider theme={theme}>
+              <Normalize />
+              <GlobalStyle />
+              <Header />
+              <Container>
+                <Routing />
+              </Container>
+            </ThemeProvider>
+          </Provider>
+        </ApolloProvider>
       </>
     );
   }

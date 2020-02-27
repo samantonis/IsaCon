@@ -1,26 +1,46 @@
+import { useMutation } from '@apollo/react-hooks';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Delete, Edit } from 'styled-icons/typicons';
+import * as mutations from '../../graphql/mutations';
+import { gql } from 'apollo-boost';
+import { todosDelete } from '../../store/reducers/todo';
 
-const TodoList = ({ className, error, loading, listTodos }) => {
-  if (error) return <h3>Error</h3>;
-  if (loading || !listTodos) return <h3>Loading...</h3>;
-  return (
+const TodoList = ({ className, listTodos }) => {
+  const dispatch = useDispatch();
+  const [deleteTodo] = useMutation(
+    gql`
+      ${mutations.deleteTodo}
+    `,
+    {
+      onCompleted(data) {
+        dispatch(todosDelete(data));
+      }
+    }
+  );
+  const onDelete = id => {
+    deleteTodo({ variables: { input: { id } } });
+  };
+
+  const data = listTodos.items;
+
+  return data ? (
     <>
       <ul className={className}>
-        {listTodos.items.sort().map(todo => (
+        {data.map(todo => (
           <li key={todo.id}>
             <h4>{todo.name}</h4>
             <p>{todo.description}</p>
             <div className="actions">
               <Edit size="32" />
-              <Delete size="32" />
+              <Delete onClick={() => onDelete(todo.id)} size="32" />
             </div>
           </li>
         ))}
       </ul>
     </>
-  );
+  ) : null;
 };
 
 export default styled(TodoList)`
