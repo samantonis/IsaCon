@@ -3,6 +3,6 @@
     "AppSyncApiName": "isacon",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "DynamoDBEnableServerSideEncryption": "false",
-    "S3DeploymentBucket": "amplify-authcra-devw-174034-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/d9c8e74c1a5f66fc5624782f4c09c8491cd6232f"
+    "S3DeploymentBucket": "amplify-authcra-devn-162530-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/8221b96caa505be2e45fac2edaa76ba1437e0969"
 }
